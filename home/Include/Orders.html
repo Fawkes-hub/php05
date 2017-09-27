@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="./Include/css/css.css" rel="stylesheet" type="text/css" />
+<link href="./Include/css/common.css" rel="stylesheet" tyle="text/css" />
+<link href="./Include/css/Orders.css" rel="stylesheet" type="text/css" />
+<script src="./Include/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="./Include/js/jquery.reveal.js" type="text/javascript"></script>
+<script src="./Include/js/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
+<script src="./Include/js/jquery.sumoselect.min.js" type="text/javascript"></script>
+<script src="./Include/js/common_js.js" type="text/javascript"></script>
+<script src="./Include/js/footer.js" type="text/javascript"></script>
+<script src="./Include/js/jquery.jumpto.js" type="text/javascript"></script>
+<title>确认订单界面</title>
+</head>
+ <script type="text/javascript">
+        $(document).ready(function () {
+            window.asd = $('.SlectBox').SumoSelect({ csvDispCount: 3 });
+            window.test = $('.testsel').SumoSelect({okCancelInMulti:true });
+        });
+    </script>
+<body>
+<!--确认订单页样式-->
+ <div class="Inside_pages clearfix" id="Orders">
+ <div class="Process"><img src="./Include/images/Process_img_02.png" /></div>
+ <div class="Orders_style clearfix">
+
+<div id="Orders" class="Inside_pages  clearfix">
+  <div class="Orders_style clearfix">
+     <div class="address clearfix">
+       <div class="title">收货人信息</div>
+          <div class="adderss_list clearfix">
+            <div class="title_name">选择收货地址 <a href="#">+添加地址</a></div>
+             <div class="list" id="select">
+          
+
+            <ul class="confirm active">
+                <div class="default">默认地址</div>
+                <div class="adderss_operating">
+                 <div class="Operate"><a href="#" class="delete_btn"></a> <a href="#" class="modify_btn"></a></div>
+                </div>
+               
+                <div class="user_address">
+                   <?php  $user_hlist=$user_hlist[0]; 
+     
+                   ?>
+        <li><label>收货人姓名：</label><span><?php echo $user_hlist['addname'] ?></span></li>
+        
+        <li><label>详细地址：</label><span><?php echo $user_hlist['address'] ?></span></li>
+        <li><label>移动电话：</label><span><?php echo $user_hlist['phone'] ?></span></li>
+        <li><label>邮政编码：</label><span><?php echo $user_hlist['code'] ?></span></li>
+         <!-- <li><label>固定电话</label><span></span></li>         -->
+                </div>
+            </ul>
+             
+
+            <!--  <ul class="">
+                    <div class="adderss_operating">
+                   <div class="Operate"><a href="#" class="delete_btn"></a> <a href="#" class="modify_btn"></a></div>
+                    </div>
+                     <div class="user_address">
+                    <li>小张</li>
+                    <li>四川成都高新区创业路10号3栋1单元1102式</li>
+                    <li class="Postcode">610043</li>
+                    <li>18908269130</li>
+                  </div>
+            </ul>
+             <ul class="">
+                    <div class="adderss_operating">
+                      <div class="Operate"><a href="#" class="delete_btn"></a> <a href="#" class="modify_btn"></a></div>
+                    </div>
+                     <div class="user_address">
+                    <li>小张</li>
+                    <li>四川成都高新区创业路10号3栋1单元1102式</li>
+                    <li class="Postcode">610043</li>
+                    <li>18908269130</li>
+                  
+            </ul> -->
+            </div>
+           </div>
+      <!--收货地址样式-->
+     <div class="Shipping_address">
+       <ul class="detailed">
+   <!-- <?php  var_dump($user_hlist) ?> -->
+
+        <li><label>收货人姓名</label><span><?php echo $user_hlist['addname'] ?></span></li>
+        
+        <li><label>详细地址</label><span><?php echo $user_hlist['address'] ?></span></li>
+        <li><label>移动电话</label><span><?php echo $user_hlist['phone'] ?></span></li>
+        <li><label>邮政编码</label><span><?php echo $user_hlist['code'] ?></span></li>
+         <!-- <li><label>固定电话</label><span></span></li>         -->
+        
+       </ul>
+     </div>
+     </div> 
+        
+     	<form class="form" method="post" action="./index.php?c=order&a=add">  
+		<fieldset> 
+      <!-- 把收货人的信息存到session中，后面页面直接提取 -->
+        <?php  $_SESSION['user_address']=$user_hlist?>
+    <div class="Product_List">
+      
+      <table>
+         <thead>
+              <tr class="title">
+                <td class="name">商品名称</td>
+                <td class="">商品介绍</td>
+                <td class="price">商品价格</td>
+                <td class="Preferential">优惠价</td>
+                <td class="Quantity">购买数量</td>
+                <td class="Money">金额</td>
+               </tr>
+         </thead>
+         <tbody>
+         <?php if(!empty($_SESSION['cart'])){  
+                
+                ?>
+        <?php foreach($_SESSION['cart'] as $key=>$val){ ?>
+    
+      
+         <tr>
+          <td class="Product_info">
+           <a href="#"> <?php   echo $val['pic']?'<img src="../public/goods/'.$val['pic'].'"  width="100px" height="100px"/>':''   ?> </a>
+             <a href="#" class="product_name"><?php echo $val['name']?$val['name']:''  ?></a>
+          
+           </td>
+              
+              <td style="font-size: 14px;"
+
+              ><?php echo $val['company']?$val['company']:''  ?> <br/><br/>  
+           
+            <?php echo $val['descr']  ?></td> 
+
+
+          <td><?php echo $val['price']?'￥'.$val['price']:''  ?></td>
+
+          <td><?php echo $val['price']?'￥'.$val['price']:''  ?></td>
+
+          <td><?php echo $val['num']  ?></td>
+
+          <td class="Moneys"> <?php echo $val['price']?'￥'.$val['price']*$val['num']:''  ?></td>
+         </tr>
+
+           
+         
+         <?php } ?>
+         <?php }else{ echo '请前往购物车选择商品后提交订单';} ?>
+         </tbody>
+      </table>
+      <div class="Pay_info">
+       <label>订单留言</label><input name="" type="text"  onkeyup="checkLength(this);" class="text_name " />  <span class="wordage">
+      </div>
+      <!--价格-->
+       <?php  if(!empty($_SESSION['cart'])){      
+         foreach($_SESSION['cart'] as $key=>$val){            
+            $xiaoji=$val['price']*$val['num'];                
+                 $total=$total+$xiaoji;                   
+               } 
+           } ?>  
+       
+           <?php 
+          
+ 
+
+           $_SESSION['cart'][$val['id']]['total']=$total;
+        
+
+
+         ?>   
+      <div class="price_style">
+        <div class="right_direction">
+          <ul>
+
+           <li><label>商品总价</label><i>￥</i><span><?php echo $total ?></span></li>
+           <li><label>优惠金额</label><i>￥</i><span>0</span></li>
+           <li><label>配&nbsp;&nbsp;送&nbsp;&nbsp;费</label><i>￥</i><span>0</span></li>
+           <li class="shiji_price"><label>实&nbsp;&nbsp;付&nbsp;&nbsp;款</label><i>￥</i><span><?php echo $total ?></span></li>    
+          </ul>   
+          
+
+          <div class="btn"><input name="submit" type="submit" value="提交订单" class="submit_btn"/> <a href="./index.php?c=cart&a=index"><input name="" type="button" value="返回购物车"  class="return_btn"/></div>
+
+
+           <div class="integral right">待订单确认后，你将获得<span><?php echo ceil($total/10) ?></span>积分</div>
+        </div>
+      </div>
+     </div>  
+     </fieldset>
+        </form>
+  </div>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

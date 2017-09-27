@@ -1,0 +1,219 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>主要内容区main</title>
+<link href="./Include/css/css.css" type="text/css" rel="stylesheet" />
+<link href="./Include/css/main.css" type="text/css" rel="stylesheet" />
+<link rel="shortcut icon" href="../Include/images/main/favicon.ico" />
+<style>
+body{overflow-x:hidden; background:#f2f0f5; padding:15px 0px 10px 5px;}
+#searchmain{ font-size:12px;}
+#search{ font-size:12px; background:#548fc9; margin:10px 10px 0 0; display:inline; width:100%; color:#FFF; float:left}
+#search form span{height:40px; line-height:40px; padding:0 0px 0 10px; float:left;}
+#search form input.text-word{height:24px; line-height:24px; width:180px; margin:8px 0 6px 0; padding:0 0px 0 10px; float:left; border:1px solid #FFF;}
+#search form input.text-but{height:24px; line-height:24px; width:55px; background:url(./Include/images/main/list_input.jpg) no-repeat left top; border:none; cursor:pointer; font-family:"Microsoft YaHei","Tahoma","Arial",'宋体'; color:#666; float:left; margin:8px 0 0 6px; display:inline;}
+#search a.add{ background:url(./Include/images/main/add.jpg) no-repeat -3px 7px #548fc9; padding:0 10px 0 26px; height:40px; line-height:40px; font-size:14px; font-weight:bold; color:#FFF; float:right}
+#search a:hover.add{ text-decoration:underline; color:#d2e9ff;}
+#main-tab{ border:1px solid #eaeaea; background:#FFF; font-size:12px;}
+#main-tab th{ font-size:12px; background:url(./Include/images/main/list_bg.jpg) repeat-x; height:32px; line-height:32px;}
+#main-tab td{ font-size:12px; line-height:40px;}
+#main-tab td a{ font-size:12px; color:#548fc9;}
+#main-tab td a:hover{color:#565656; text-decoration:underline;}
+.bordertop{ border-top:1px solid #ebebeb}
+.borderright{ border-right:1px solid #ebebeb}
+.borderbottom{ border-bottom:1px solid #ebebeb}
+.borderleft{ border-left:1px solid #ebebeb}
+.gray{ color:#dbdbdb;}
+td.fenye{ padding:10px 0 0 0; text-align:right;}
+.bggray{ background:#f9f9f9}
+</style>
+</head>
+<body>
+<!--main_top-->
+<table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
+  <tr>
+    <td width="99%" align="left" valign="top">您的位置：订单管理</td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
+  		<tr>
+   		 <td width="90%" align="left" valign="middle">
+	        
+          <!-- 用于查询的框 -->
+           <form method="get" action="./index.php?">
+            <input type="hidden" name="c" value="user">
+            <input type="hidden" name="a" value="index">
+ 	         <!-- //上面两句是为了能够把C 与 A 传输到查询的的页面。 -->
+           <span>订单查询：</span>
+	         <input type="text" name="username" value="" class="text-word">
+	         <input name="" type="submit" value="查询" class="text-but">
+	         </form>
+        
+
+
+         </td>
+  		  <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="./index.php?c=user&a=add" target="mainFrame" onFocus="this.blur()" class="add">新增会员</a></td>
+  		</tr>
+	</table>
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
+      
+      <tr>
+        <th align="center" valign="middle" class="borderright">编号</th>
+        <th align="center" valign="middle" class="borderright">会员ID</th>
+        <th align="center" valign="middle" class="borderright">联系人</th>   
+        <th align="center" valign="middle" class="borderright">地址</th>
+        <th align="center" valign="middle" class="borderright">电话</th>
+        <th align="center" valign="middle" class="borderright">邮编</th>
+        <th align="center" valign="middle" class="borderright">总金额</th>
+        <th align="center" valign="middle" class="borderright">状态</th>
+        <th align="center" valign="middle" class="borderright">浏览订单</th>
+
+       <!--  <th align="center" valign="middle">操作</th> -->
+      </tr>
+     
+      <?php if(!empty($orders)){ ?>
+      <?php  foreach($orders as $val){ ?>
+       
+       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="center" valign="middle" class="borderright borderbottom"><?php echo $page->offset+$i++ ?></td>
+        <td align="center" valign="middle" class="borderright borderbottom"><?php echo $val['uid'] ?></td>
+        <td align="center" valign="middle" class="borderright borderbottom"><?php echo $val['linkname'] ?></td>
+        <td align="center" valign="middle" class="borderright borderbottom"><?php echo $val['address'] ?></td>
+        <td align="center" valign="middle" class="borderright borderbottom"><?php echo $val['phone'] ?></td>
+        <td align="center" valign="middle" class="borderright borderbottom"><?php echo $val['code'] ?></td>
+        <td align="center" valign="middle" class="borderright borderbottom"><?php echo $val['total'] ?></td>
+        <td align="center" valign="middle" class="borderright borderbottom">
+        <!-- <?php
+         echo $val['status']==0?'<a href="./index.php?c=order&a=status&id='.$val['id'].'&status=1">新订单</a>':'已发货' ?>
+         -->
+          <?php
+      
+      if($val['status']==0){
+       echo '<a href="./index.php?c=order&a=status&id='.$val['id'].'&status=1">新订单</a>';
+      }elseif($val['status']==1){
+        echo '已发货' ;
+      }elseif($val['status']==2){
+        echo '买家已收到货物';
+      }elseif($val['status']==3){
+        echo  '买家已评论，订单完成';
+      }
+
+
+
+          ?>
+
+
+         </td>
+         <td align="center" valign="middle" class="borderright borderbottom"><a href="./index.php?c=order&a=orderinfo&oid=<?php echo $val['id'] ?>">查看订单详情</a> </td>
+
+        
+       
+        <!-- <td align="center" valign="middle" class="borderbottom">
+            <a href="./index.php?c=user&a=save&id=<?php echo $val['id']?>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a>
+              <span class="gray">&nbsp;|&nbsp;</span>
+             <a href="./index.php?c=user&a=information&id=<?php echo $val['id']?>&username=<?php echo $val['username'] ?>" target="mainFrame" onFocus="this.blur()" class="add">详细信息</a>
+               <span class="gray">&nbsp;|&nbsp;</span>
+            <a href="./index.php?c=user&a=del&id=<?php echo $val['id']?>" target="mainFrame" onFocus="this.blur()" class="add">删除</a>
+
+        </td> -->
+      </tr>
+       <?php } ?>
+       <?php }else{
+              echo "<b style='font-size: 16px;color:red;'>清单列表为空</b>";
+  
+
+       } ?>
+     <!-- <tr class="bggray" onMouseOut="this.style.backgroundColor='#f9f9f9'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="center" valign="middle" class="borderright borderbottom">2</td>
+        <td align="center" valign="middle" class="borderright borderbottom">admin</td>
+        <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
+        <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
+        <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
+        <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+      </tr>
+      <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="center" valign="middle" class="borderright borderbottom">3</td>
+        <td align="center" valign="middle" class="borderright borderbottom">admin</td>
+        <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
+        <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
+        <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
+        <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+      </tr>
+      <tr class="bggray" onMouseOut="this.style.backgroundColor='#f9f9f9'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="center" valign="middle" class="borderright borderbottom">4</td>
+        <td align="center" valign="middle" class="borderright borderbottom">admin</td>
+        <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
+        <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
+        <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
+        <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+      </tr>
+      <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="center" valign="middle" class="borderright borderbottom">5</td>
+        <td align="center" valign="middle" class="borderright borderbottom">admin</td>
+        <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
+        <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
+        <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
+        <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+      </tr>
+      <tr class="bggray" onMouseOut="this.style.backgroundColor='#f9f9f9'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="center" valign="middle" class="borderright borderbottom">6</td>
+        <td align="center" valign="middle" class="borderright borderbottom">admin</td>
+        <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
+        <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
+        <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
+        <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+      </tr>
+      <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="center" valign="middle" class="borderright borderbottom">7</td>
+        <td align="center" valign="middle" class="borderright borderbottom">admin</td>
+        <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
+        <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
+        <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
+        <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+      </tr>
+      <tr class="bggray" onMouseOut="this.style.backgroundColor='#f9f9f9'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="center" valign="middle" class="borderright borderbottom">8</td>
+        <td align="center" valign="middle" class="borderright borderbottom">admin</td>
+        <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
+        <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
+        <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
+        <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+      </tr>
+      <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="center" valign="middle" class="borderright borderbottom">9</td>
+        <td align="center" valign="middle" class="borderright borderbottom">admin</td>
+        <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
+        <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
+        <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
+        <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+      </tr>
+      <tr class="bggray" onMouseOut="this.style.backgroundColor='#f9f9f9'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="center" valign="middle" class="borderright borderbottom">10</td>
+        <td align="center" valign="middle" class="borderright borderbottom">admin</td>
+        <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
+        <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
+        <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
+        <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+      </tr> -->
+    </table></td>
+    </tr>
+  <tr>
+   <!--  <td align="left" valign="top" class="fenye">11 条数据 1/1 页 -->
+    
+    <td align="left" valign="top" class="fenye"><?php echo $page->getButton();?></td>
+
+
+
+    <!-- &nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">尾页</a></td> -->
+  
+
+  </tr>
+</table>
+</body>
+</html>

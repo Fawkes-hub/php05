@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+		<h1>运行环境</h1>
+		<p>当前php版本为:<?php echo PHP_VERSION?></p>
+		<p>当前操作系统为:<?php echo PHP_OS?></p>
+		<h2>文件信息</h2>
+		<p>../public/Config/config.php文件---------<?php echo is_writeable('../public/Config/config.php')?'可写':'不可写'?></p>
+		<p>../public/uploads/目录---------<?php echo is_writeable('../public/uploads')?'可写':'不可写'?></p>
+
+		<a href="index.php?a=config">下一步</a>
+
+
+</body>
+</html>
