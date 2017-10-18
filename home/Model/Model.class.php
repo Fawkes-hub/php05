@@ -236,7 +236,7 @@
 
 
 		//用于添加 修改 删除
-		protected function execute($sql){
+		public function execute($sql){
 			$result = mysqli_query($this->link,$sql);
 			if($result && mysqli_affected_rows($this->link)>0){
 				//如果是添加操作就将添加成功的id返回回去 如果不是添加操作 就返回受影响行

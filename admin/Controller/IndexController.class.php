@@ -10,14 +10,23 @@
 			//echo '<a href="./index.php?c=user&a=index">跳转到user控制器下面的index方法</a>';
 			
 			if(empty($_SESSION['admin'])){
+				
 				header('./location:inpdex.php?c=index&a=inlogin');
 			}else{
 				
 				include './View/index.html';
 			}
 		}
+		//验证码的方法
+		public function code(){
+			$code=new Code;
+			//var_dump($code);
+    		return $code->make();
+		}
 
 		public function login(){
+			
+			//include './View/index.html';
 			include './View/login.html';
 			//由登录页面之间跳转过来
 			
@@ -26,10 +35,21 @@
 
 		public function inlogin(){
 			//接受数据
-			
+			//var_dump($_POST);
+			//判断验证码
+			$code= new Code();
+    	    $code1=$code->get();
+    	    //如果验证码不正确就返回，验证码的错误
+    		if(strtoupper($_POST['code'])!=$code1){
+    			
+    			echo  "<script>alert('验证输入错误，请重新输入');history.go(-1);</script>";
+                //header('location:./index.php?c=index&a=login') ;
+                exit;
+            }
+
 			unset($_POST['x']);
 			unset($_POST['y']);
-			//var_dump($_POST);
+			
 			/*$name= $_POST['username'];
 			$password=$_POST['password'];
 			var_dump($name);
@@ -68,7 +88,7 @@
 			//正则匹配一下账号密码
 
 
-
+			//var_dump($userarr);
 			$user=new Model('user');
 			
 			$a=$user->where($userarr)->select();
@@ -79,7 +99,7 @@
 			//将删除后的信息保存到session中
 			$_SESSION['admin']=$username[0];
 			
-			echo '登陆成功';
+			
 
 			header('location:./index.php?c=index&a=index') ;
 			
@@ -87,7 +107,8 @@
 			}else{
 
 
-			echo '账号或密码输入错误，请重新输入3';
+			echo "<script>alert('账号或密码输入错误，请重新输入');history.go(-1);</script>";
+			exit;
 			}
 
 		

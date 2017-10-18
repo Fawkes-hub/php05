@@ -48,10 +48,6 @@ $arr=array(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 
 
-
-//--修改表结构
-
-
 //--创建商品的字段名
 'DROP TABLE IF EXISTS goods;',
 'CREATE TABLE IF NOT EXISTS goods(

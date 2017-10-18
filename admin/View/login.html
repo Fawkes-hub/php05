@@ -1,44 +1,100 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>兄弟连 PHP05 -冯轲</title>
-    <link href="./Include/css/alogin.css" rel="stylesheet" type="text/css" />
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统登录</title>
+<link href="./Include/Css/login.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
+<link href="./Include/Css/demo.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
+
+
+
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script>
+//        $.validator.setDefaults({
+//            submitHandler: function() {
+//                alert("提交事件!");
+//            }
+//        });
+        $().ready(function() {
+            $("#commentForm").validate();
+        });
+    //验证两次密码是否一样
+
+    </script>
+    <style>
+        .error{
+            color:red;
+        }
+    </style>
+
+
+
+
 </head>
+
 <body>
-    <form id="form1" runat="server" action="./index.php?c=index&a=inlogin" method="post">
-    <div class="Main">
-        <ul>
-            <li class="top"></li>
-            <li class="top2"></li>
 
 
 
-            <li class="topA"></li>
-            <li class="topB"><span><img src="./Include/images/login/logo.gif" alt="" style="" /></span></li>
-            <li class="topC"></li>
-            <li class="topD">
-                <ul class="login">
-                    <li><span class="left login-text">用户名：</span> <span style="left">
-                        <input id="Text1" type="text" class="txt" name="username"/>
-                        <?php echo @$_GET['username'] ?>  
-                     
-                    </span></li>
-                    <li><span class="left login-text">密码：</span> <span style="left">
-                       <input id="Text2" type="password" class="txt" name="password" />  
-                        <?php echo @$_GET['password'] ?>  
-                    </span></li>
-                </ul>
-            </li>
-            <li class="topE"></li>
-            <li class="middle_A"></li>
-            <li class="middle_B"></li>
-            <li class="middle_C"><span class="btn"><input name="" type="image" src="./Include/images/login/btnlogin.gif" /></span></li>
-            <li class="middle_D"></li>
-            <li class="bottom_A"></li>
-            <li class="bottom_B">海达-侯马经济开发区&nbsp;&nbsp;www.hma.gov.cn</li>
-        </ul>
-    </div>
-    </form>
+
+<div class="banner">
+
+<div class="login-aside">
+  <div id="o-box-up"></div>
+  <div id="o-box-down"  style="table-layout:fixed;">
+   <div class="error-box"></div>
+   
+   <form class="registerform" action="./index.php?c=index&a=inlogin" method="post">
+   <div class="fm-item">
+	   <label for="logonId" class="form-label">后台系统登陆：</label>
+	   <input type="text" placeholder="输入账号"  id="username" class="i-text"  name="username" >    
+       <div class="ui-form-explain"></div>
+  </div>
+  
+  <div class="fm-item">
+	   <label for="logonId" class="form-label">登陆密码：</label>
+	   <input type="password" value="" maxlength="100" id="password" class="i-text" data-rule-required="true" name="password">    
+       <div class="ui-form-explain"></div>
+  </div>
+  
+  <div class="fm-item pos-r">
+	   <label for="logonId" class="form-label">验证码</label>
+	   <input type="text"  id="yzm" class="i-text yzm"  name="code">    
+       <div class="ui-form-explain"><img src="./index.php?c=index&a=code" class="yzm-img" onclick="this.src='./index.php?c=index&a=code' "/></div>
+  </div>
+  
+  <div class="fm-item">
+	   <label for="logonId" class="form-label"></label>
+	   <input type="submit" value="" tabindex="4" id="send-btn" class="btn-login"> 
+       <div class="ui-form-explain"></div>
+  </div>
+  
+  </form>
+  
+  </div>
+
+</div>
+
+	<div class="bd">
+		<ul>
+			<li style="background:url(./Include/themes/theme-pic1.jpg) #CCE1F3 center 0 no-repeat;"><a target="_blank" ></a></li>
+			<li style="background:url(./Include/themes/theme-pic2.jpg) #BCE0FF center 0 no-repeat;"><a target="_blank" ></a></li>
+		</ul>
+	</div>
+
+	<div class="hd"><ul></ul></div>
+</div>
+<script type="text/javascript">jQuery(".banner").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click" });</script>
+
+
+<div class="banner-shadow"></div>
+
+<div class="footer">
+   <p>Copyright &copy; 2014.Company name All rights reserved.<a target="_blank" href="http://guantaow.taobao.com/"></a></p>
+</div>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

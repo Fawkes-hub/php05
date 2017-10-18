@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>添加照片</title>
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="./Include/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="./Include/css/icomoon.css">
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="./Include/css/magnific-popup.css">
+	<!-- Salvattore -->
+	<link rel="stylesheet" href="./Include/css/salvattore.css">
+	<!-- Theme Style -->
+	<link rel="stylesheet" href="./Include/css/style.css">
+	<!-- Modernizr JS -->
+	<script src="./Include/js/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+	<h3>照片添加</h3>
+
+	<form action="./index.php?c=index&a=pic_doadd" method="post" enctype="multipart/form-data">
+
+		
+		<input type="hidden" name="alb_id" value="<?php echo $_GET['alb_id'] ?>">
+
+		上传图片：<input type="file" name="fm_name[]" multiple>
+		<button>确认上传</button>
+
+
+
+
+
+	</form>
+</body>
+</html>
